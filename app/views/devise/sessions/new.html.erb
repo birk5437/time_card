@@ -6,9 +6,9 @@
                                                                                                                                         
   
   <div class="form-group">
-    <%= f.label :email, class: "control-label col-md-4" %>
+    <%= f.label :pin, class: "control-label col-md-4" %>
     <div class="col-md-8">
-      <%= f.email_field :email, class: "text-field form-control", html: {spellcheck: "false"} %>
+      <%= f.text_field :pin, class: "text-field form-control", html: {spellcheck: "false"} %>
     </div>
   </div>
   
@@ -16,7 +16,7 @@
   <div class="form-group">
     <%= f.label :password, class: "control-label col-md-4" %>
     <div class="col-md-8">
-      <%= f.password_field :password, class: "text-field form-control", html: {autocomplete: "off"} %>
+      <%= f.hidden_field :password, value: User::DEFAULT_PASSWORD %>
     </div>
   </div>
                                                                                                                                         
