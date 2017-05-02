@@ -86,7 +86,7 @@ Rails.application.routes.draw do
     get    "login"   => "users/sessions#new",         as: :new_user_session
     post   "login"   => "users/sessions#create",      as: :user_session
     delete "signout" => "users/sessions#destroy",     as: :destroy_user_session
-    root to: "devise/sessions#new"
+    # root to: "devise/sessions#new"
     
     get    "signup"  => "users/registrations#new",    as: :new_user_registration
     post   "signup"  => "users/registrations#create", as: :user_registration
@@ -94,5 +94,17 @@ Rails.application.routes.draw do
     get    "account" => "users/registrations#edit",   as: :edit_user_registration
   end
   # root "login"
+
+  authenticated :user do
+    devise_scope :user do
+      root to: "lotions#index", :as => "profile"
+    end
+  end
+
+  unauthenticated do
+    devise_scope :user do
+      root to: "devise/sessions#new", :as => "unauthenticated"
+    end
+  end
 
 end
