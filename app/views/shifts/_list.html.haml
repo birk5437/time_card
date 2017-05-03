@@ -1,0 +1,16 @@
+-# http://www.responsivewebmobile.com/posts/view/2013/06/04/5/Responsive_Pin_Page_templates_free
+
+%table
+  %thead
+    %tr
+      %th ID
+      %th User
+      %th Clock-In Time
+      %th Clock-Out Time
+  %tbody
+    - shifts.each do |shift|
+      %tr
+        %td= shift.id
+        %td= shift.user.to_s
+        %td= shift.clock_in_time.to_s
+        %td= shift.clock_out_time.to_s

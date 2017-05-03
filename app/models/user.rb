@@ -9,11 +9,11 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :items, as: :created_by, foreign_key: :created_by_id, dependent: :nullify
+  has_many :shifts
+
   belongs_to :created_by, :class_name => "User"
 
-  before_save :set_admin_to_true
-
-  def set_admin_to_true
-    self.admin = true
+  def clocked_in?
+    shifts.order(:clock_in_time).last.try(:clock_out_time).blank?
   end
 end
