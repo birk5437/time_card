@@ -60,6 +60,7 @@ gem 'aws-sdk', '~> 2.3.0'
 
 gem 'snoo'
 gem 'chronic'
+gem 'dotiw'
 
 gem 'powder'
 gem "awesome_print"

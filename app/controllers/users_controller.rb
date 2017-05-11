@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_filter :redirect_unless_superuser, only: [:new, :create, :edit, :update, :destroy, :get_image_list, :get_listings]
-  before_action :set_user, only: [:show, :edit, :update, :destroy, :vote]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :vote, :clock_in, :clock_out]
 
   # GET /users
   # GET /users.json
@@ -10,6 +10,28 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html
       format.json { render json: @users }
+    end
+  end
+
+  def clock_page
+    @user = current_user
+  end
+
+  def clock_in
+    if @user.clocked_out?
+      @user.clock_in!
+      redirect_to "/", notice: 'User has been clocked in.'
+    else
+      redirect_to "/", error: 'ERROR: User is already clocked in!'
+    end
+  end
+
+  def clock_out
+    if @user.clocked_in?
+      @user.clock_out!
+      redirect_to "/", notice: 'User has been clocked out.'
+    else
+      redirect_to "/", error: 'ERROR: User is already clocked out!'
     end
   end
 

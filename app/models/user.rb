@@ -13,7 +13,41 @@ class User < ActiveRecord::Base
 
   belongs_to :created_by, :class_name => "User"
 
-  def clocked_in?
-    shifts.order(:clock_in_time).last.try(:clock_out_time).blank?
+
+  def latest_shift
+    shifts.order('clock_in_time desc').limit(1).first
   end
+
+  def clocked_in?
+    latest_shift = shifts.order('clock_in_time desc').limit(1).first
+    latest_shift.present? && latest_shift.clock_out_time.blank?
+  end
+
+  def clocked_out?
+    # latest_shift = shifts.order('clock_in_time desc').limit(1).first
+    # latest_shift.blank? || latest_shift.clock_out_time.present?
+    !clocked_in?
+  end
+
+  def clock_in!
+    if clocked_in?
+      errors.add(:base, "Already clocked out!")
+      raise ActiveRecord::RecordInvalid
+    else
+      s = shifts.build(clock_in_time: DateTime.now)
+      s.save!
+    end
+  end
+
+  def clock_out!
+    if clocked_out?
+      errors.add(:base, "Already clocked out!")
+      raise ActiveRecord::RecordInvalid
+    else
+      s = latest_shift
+      s.clock_out_time = DateTime.now
+      s.save!
+    end
+  end
+
 end

@@ -17,7 +17,15 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :users
+  resources :users do
+    collection do
+      get "clock_page"
+    end
+    member do
+      get "clock_in"
+      get "clock_out"
+    end
+  end
   resources :shifts
 
   # resources :tags, only: [:index]
@@ -98,7 +106,7 @@ Rails.application.routes.draw do
 
   authenticated :user do
     devise_scope :user do
-      root to: "lotions#index", :as => "profile"
+      root to: "users#clock_page", :as => "profile"
     end
   end
 

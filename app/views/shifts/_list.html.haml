@@ -11,6 +11,6 @@
     - shifts.each do |shift|
       %tr
         %td= shift.id
-        %td= shift.user.to_s
+        %td= shift.user.email
         %td= shift.clock_in_time.to_s
         %td= shift.clock_out_time.to_s
