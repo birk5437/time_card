@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  filter_access_to :all
   before_filter :redirect_unless_superuser, only: [:new, :create, :edit, :update, :destroy, :get_image_list, :get_listings]
   before_action :set_user, only: [:show, :edit, :update, :destroy, :vote, :clock_in, :clock_out]
 
