@@ -8,7 +8,7 @@ authorization do
     has_permission_on :shifts, to: :manage do
       if_attribute :user => is { user }
     end
-    has_permission_on :users, to: [:read_and_update, :clock_page, :clock_in, :clock_out] do
+    has_permission_on :users, to: [:read_and_update_without_index, :clock_page, :clock_in, :clock_out] do
       if_attribute :id => is { user.id }
     end
   end
@@ -43,7 +43,8 @@ end
 privileges do
   # default privilege hierarchies to facilitate RESTful Rails apps
   privilege :manage, :includes => [:create, :read, :update, :delete]
-  privilege :read_and_update, :includes => [:create, :read, :update, :delete]
+  privilege :read_and_update, :includes => [:create, :read, :update]
+  privilege :read_and_update_without_index, :includes => [:create, :update, :show]
   privilege :read, :includes => [:index, :show]
   privilege :create, :includes => :new
   privilege :update, :includes => :edit

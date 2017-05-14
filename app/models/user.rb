@@ -14,6 +14,8 @@ class User < ActiveRecord::Base
 
   belongs_to :created_by, :class_name => "User"
 
+  validates :first_name, presence: true
+
 
   def latest_shift
     shifts.order('clock_in_time desc').limit(1).first
@@ -49,6 +51,10 @@ class User < ActiveRecord::Base
       s.clock_out_time = DateTime.now
       s.save!
     end
+  end
+
+  def name
+    "#{first_name} #{last_name}".strip.presence
   end
 
 

@@ -23,11 +23,12 @@
               - if tag.hotels.present?
                 %li= link_to tag.name, "/tags/#{tag.dehumanized_name}"
     %ul.nav.navbar-nav.navbar-right
-      %li= link_to "View Hotels", hotels_path
-      %li= link_to "View Lotions", lotions_path
+      %li= link_to "View Your Shifts", user_path(current_user)
       - if defined?(Devise)
         - if user_signed_in?
-          - if current_user.superuser?
+          - if permitted_to?(:index, :users)
+            %li= link_to "View Users", users_path
+          - if permitted_to?(:create, :users)
             %li= link_to "Add New User", new_user_path
           - if current_user.admin?
             %li= link_to "Add New Hotel", new_hotel_path

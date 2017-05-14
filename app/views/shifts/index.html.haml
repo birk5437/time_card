@@ -1,13 +1,3 @@
 -# http://www.responsivewebmobile.com/posts/view/2013/06/04/5/Responsive_Pin_Page_templates_free
 
 = render partial: "list", :locals => {:shifts => @shifts}
-
-:javascript
-  var $container = $('#lotions');
-      $container.imagesLoaded(function(){
-      $container.masonry({
-        lotionSelector : '.lotion',
-        columnWidth : 290,
-        isAnimated: true
-      });
-    });
