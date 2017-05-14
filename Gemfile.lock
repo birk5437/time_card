@@ -25,6 +25,13 @@ GIT
     acts_as_votable (0.10.0)
 
 GIT
+  remote: git://github.com/stffn/declarative_authorization.git
+  revision: 45e91af20eba71b2828c5c84066bcce3ef032e8a
+  branch: master
+  specs:
+    declarative_authorization (1.0.0.pre)
+
+GIT
   remote: git://github.com/wazery/ratyrate.git
   revision: 61487c4726c06748218fe082f85e5a253b69e225
   branch: master
@@ -116,7 +123,6 @@ GEM
       execjs
     coffee-script-source (1.9.0)
     debug_inspector (0.0.2)
-    declarative_authorization (0.5.7)
     domain_name (0.5.25)
       unf (>= 0.0.5, < 1.0.0)
     dotiw (3.1.1)
@@ -297,7 +303,7 @@ DEPENDENCIES
   chronic
   cloudinary (~> 1.1, >= 1.1.2)
   coffee-rails (~> 4.0.0)
-  declarative_authorization
+  declarative_authorization!
   devise!
   dotiw
   formtastic!

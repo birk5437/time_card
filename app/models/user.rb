@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  has_and_belongs_to_many :roles
 
   DEFAULT_PASSWORD = "asdfg"
 
@@ -48,6 +49,11 @@ class User < ActiveRecord::Base
       s.clock_out_time = DateTime.now
       s.save!
     end
+  end
+
+
+  def role_symbols
+    (roles || []).map {|r| r.title.to_sym}
   end
 
 end
