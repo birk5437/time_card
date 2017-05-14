@@ -66,6 +66,7 @@ gem 'powder'
 gem "awesome_print"
 
 gem 'haml-rails'
+gem 'declarative_authorization'
 
 gem 'formtastic', :github => 'justinfrench/formtastic', :branch => 'master'
 gem 'formtastic-bootstrap'

@@ -116,6 +116,7 @@ GEM
       execjs
     coffee-script-source (1.9.0)
     debug_inspector (0.0.2)
+    declarative_authorization (0.5.7)
     domain_name (0.5.25)
       unf (>= 0.0.5, < 1.0.0)
     dotiw (3.1.1)
@@ -296,6 +297,7 @@ DEPENDENCIES
   chronic
   cloudinary (~> 1.1, >= 1.1.2)
   coffee-rails (~> 4.0.0)
+  declarative_authorization
   devise!
   dotiw
   formtastic!
