@@ -22,6 +22,10 @@ authorization do
     has_permission_on :shifts, to: :manage
     has_permission_on :users, to: :manage
   end
+
+  role :superuser do
+    has_omnipotence
+  end
   
   # permissions on other roles, such as
   # role :admin do
