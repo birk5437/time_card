@@ -7,6 +7,7 @@
       %th User
       %th Clock-In Time
       %th Clock-Out Time
+      %th Shift Duration
   %tbody
     - shifts.each do |shift|
       %tr
@@ -14,3 +15,7 @@
         %td= shift.user.email
         %td= shift.clock_in_time.to_s
         %td= shift.clock_out_time.to_s
+        - if shift.clock_out_time.present?
+          %td= distance_of_time_in_words(shift.clock_in_time, shift.clock_out_time)
+        - else
+          %td= time_ago_in_words(shift.clock_in_time)

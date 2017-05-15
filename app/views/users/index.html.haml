@@ -8,5 +8,6 @@
   %tbody
     - @users.each do |user|
       %tr
-        %td= user.name
+        - if permitted_to?(:show, user)
+          %td= link_to user.name, user_path(user)
         %td= user.email

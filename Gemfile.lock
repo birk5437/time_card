@@ -19,6 +19,14 @@ GIT
       warden (~> 1.2.3)
 
 GIT
+  remote: git://github.com/radar/dotiw.git
+  revision: 3be9d26046f94f1f1fd735d360226a751dc9b543
+  specs:
+    dotiw (3.1.1)
+      actionpack (>= 3)
+      i18n
+
+GIT
   remote: git://github.com/ryanto/acts_as_votable.git
   revision: 9ded371ec0720d07fa7a169109da05c835a2cb51
   specs:
@@ -125,9 +133,6 @@ GEM
     debug_inspector (0.0.2)
     domain_name (0.5.25)
       unf (>= 0.0.5, < 1.0.0)
-    dotiw (3.1.1)
-      actionpack (>= 3)
-      i18n
     erubis (2.7.0)
     execjs (2.3.0)
     formtastic-bootstrap (3.1.0)
@@ -305,7 +310,7 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   declarative_authorization!
   devise!
-  dotiw
+  dotiw!
   formtastic!
   formtastic-bootstrap
   google-search
