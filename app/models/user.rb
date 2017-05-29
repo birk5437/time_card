@@ -14,11 +14,18 @@ class User < ActiveRecord::Base
 
   belongs_to :created_by, :class_name => "User"
 
-  validates :first_name, presence: true
+  validates :first_name, :pin, presence: true
+  validates :pin, uniqueness: true
+
+  validates :email, presence: true, :if => proc{ |u| u.admin? }
 
 
   def latest_shift
     shifts.order('clock_in_time desc').limit(1).first
+  end
+
+  def admin?
+    roles.all.map(&:title).include?("admin")
   end
 
   def clocked_in?

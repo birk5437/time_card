@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
   filter_access_to :all
-  before_filter :redirect_unless_superuser, only: [:new, :create, :edit, :update, :destroy, :get_image_list, :get_listings]
   before_action :set_user, only: [:show, :edit, :update, :destroy, :vote, :clock_in, :clock_out]
 
   # GET /users
@@ -56,7 +55,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     @user.created_by = current_user
     @user.password = User::DEFAULT_PASSWORD
-    @user.password_confirmation = User.DEFAULT_PASSWORD
+    @user.password_confirmation = User::DEFAULT_PASSWORD
 
     respond_to do |format|
       if @user.save
@@ -98,11 +97,6 @@ class UsersController < ApplicationController
 
   private ##################################################################################################################################
 
-  # TODO: use declarative_authorization gem when roles/CRUD gets more complex
-  def redirect_unless_superuser
-    redirect_to root_path unless current_user && current_user.superuser?
-  end
-
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find(params[:id])
@@ -110,6 +104,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:email, :password, :admin, :superuser)
+      params.require(:user).permit(:email, :password, :admin, :first_name, :last_name, :pin)
     end
 end
