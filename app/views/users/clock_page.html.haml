@@ -6,6 +6,13 @@
   = link_to "Clock Out", clock_out_user_path(@user), :class => 'btn btn-success'
 - else
   = link_to "Clock In", clock_in_user_path(@user), :class => 'btn btn-success'
+
+:javascript
+  setTimeout(function(){
+    // window.location = "/logout";
+    $("#sign_out_link").click();
+  }, 10000);
+
 -#.fieldset
 -#  %dl
 -#    %dt.label.label-default= model_class.human_attribute_name(:email)
