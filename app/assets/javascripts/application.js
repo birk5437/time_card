@@ -23,5 +23,6 @@
 //= require attachinary
 //= require jquery.raty
 //= require ratyrate
+//= require jquery.numpad
 
 //= require_tree .
