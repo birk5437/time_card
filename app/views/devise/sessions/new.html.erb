@@ -2,13 +2,13 @@
   <h1><%=t ".title", default: "Login" %></h1>
 </div>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: "form-horizontal form-user"}) do |f| %>
+<%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: "hide form-horizontal form-user"}) do |f| %>
                                                                                                                                         
   
   <div class="form-group">
     <%= f.label :pin, class: "control-label col-md-4" %>
     <div class="col-md-8">
-      <%= f.text_field :pin, class: "text-field form-control", html: {spellcheck: "false"} %>
+      <%= f.text_field :pin, class: "text-field form-control", value: nil, spellcheck: "false" %>
     </div>
   </div>
   
@@ -45,7 +45,28 @@
 
 <script type="text/javascript">
   $(document).ready(function(){
-    $("#user_pin").numpad();
+    $(".nmpd-display").val('');
+    // $.fn.numpad.defaults.gridTpl = '<table class="table"></table>';
+    $.fn.numpad.defaults.displayTpl = '<input type="password" class="form-control pin-input"/>';
+    $.fn.numpad.defaults.buttonNumberTpl =  '<button type="button" class="btn btn-circle btn-xl btn-default"></button>';
+    $.fn.numpad.defaults.buttonFunctionTpl = '';
+    $("#user_pin").numpad({
+      hidePlusMinusButton: true,
+      hideDecimalButton: true,
+
+    });
     $("#user_pin").click();
+    $("button.numero").on('click', function(){
+      var currentValue = $(".nmpd-display").val();
+      if (currentValue.length === 4){
+        $("button.numero").attr('disabled', true);
+        $("#user_pin").val(currentValue);
+        $("form#new_user").submit();
+      }
+    });
+    // $(".nmpd-display").on('change', function(){
+    //   console.log(this.val());
+    // });
+    // $(".nmpd-display").val().length;
   });
 </script>
