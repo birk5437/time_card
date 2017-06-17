@@ -19,7 +19,7 @@ class UsersController < ApplicationController
 
   def clock_in
     if @user.clocked_out?
-      @user.clock_in!
+      @user.clock_in!(request.remote_ip)
       redirect_to "/", notice: 'User has been clocked in.'
     else
       redirect_to "/", error: 'ERROR: User is already clocked in!'

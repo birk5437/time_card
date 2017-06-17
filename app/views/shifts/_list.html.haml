@@ -8,6 +8,7 @@
       %th Clock-In Time
       %th Clock-Out Time
       %th Shift Duration
+      %th IP Address
   %tbody
     - shifts.order(:clock_in_time).each do |shift|
       %tr
@@ -19,3 +20,4 @@
           %td= distance_of_time_in_words(shift.clock_in_time, shift.clock_out_time)
         - else
           %td= time_ago_in_words(shift.clock_in_time)
+        %td= shift.ip_address

@@ -78,6 +78,7 @@ gem 'cloudinary', '~> 1.1', '>= 1.1.2'
 gem 'attachinary'
 gem 'ratyrate', :github => 'wazery/ratyrate', :branch => 'master'
 gem 'rails_12factor', group: :production
+gem 'geocoder'
 
 # http://railscasts.com/episodes/258-token-fields?view=asciicast
 gem 'jquery-tokeninput-rails'

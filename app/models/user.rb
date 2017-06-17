@@ -39,12 +39,13 @@ class User < ActiveRecord::Base
     !clocked_in?
   end
 
-  def clock_in!
+  def clock_in!(ip_address=nil)
     if clocked_in?
       errors.add(:base, "Already clocked out!")
       raise ActiveRecord::RecordInvalid
     else
       s = shifts.build(clock_in_time: DateTime.now)
+      s.ip_address = ip_address if ip_address.present?
       s.save!
     end
   end
