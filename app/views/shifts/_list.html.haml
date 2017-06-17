@@ -3,18 +3,18 @@
 %table.table
   %thead
     %tr
-      %th ID
+      -#%th ID
       %th User
       %th Clock-In Time
       %th Clock-Out Time
       %th Shift Duration
   %tbody
-    - shifts.each do |shift|
+    - shifts.order(:clock_in_time).each do |shift|
       %tr
-        %td= shift.id
-        %td= shift.user.email
-        %td= shift.clock_in_time.to_s
-        %td= shift.clock_out_time.to_s
+        -#%td= shift.id
+        %td= shift.user.name
+        %td= format_time(shift.clock_in_time)
+        %td= format_time(shift.clock_out_time)
         - if shift.clock_out_time.present?
           %td= distance_of_time_in_words(shift.clock_in_time, shift.clock_out_time)
         - else
