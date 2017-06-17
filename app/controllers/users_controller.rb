@@ -57,6 +57,8 @@ class UsersController < ApplicationController
     @user.password = User::DEFAULT_PASSWORD
     @user.password_confirmation = User::DEFAULT_PASSWORD
 
+    @user.roles << Role.ci_find_by_name('barista')
+
     respond_to do |format|
       if @user.save
         format.html { redirect_to @user, notice: 'User was successfully created.' }
