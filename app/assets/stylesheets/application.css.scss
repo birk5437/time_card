@@ -272,7 +272,13 @@ $navbarTextColor: #a4e402;
         background-color: $bgHighlight; }}}
 }
 
-
+table.nmpd-grid {
+  /*-moz-transform: scale(1, -1);
+  -webkit-transform: scale(1, -1);
+  -o-transform: scale(1, -1);
+  -ms-transform: scale(1, -1);
+  transform: scale(1, -1);*/
+}
 
 .pin-input {
   letter-spacing: .5em;
