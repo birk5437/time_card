@@ -24,5 +24,6 @@
 //= require jquery.raty
 //= require ratyrate
 //= require jquery.numpad
+//= require jquery-ui
 
 //= require_tree .

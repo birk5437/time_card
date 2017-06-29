@@ -15,6 +15,7 @@
 *=  require token-input-mac
 *=  require token-input-facebook
 *= require jquery.numpad
+*= require jquery-ui
 *= require_self
 */
 @import "bootstrap_configuration";
@@ -273,7 +274,10 @@ $navbarTextColor: #a4e402;
 }
 
 table.nmpd-grid {
-  /*-moz-transform: scale(1, -1);
+  td {
+    padding-bottom: 0.7em;
+  }
+/*  -moz-transform: scale(1, -1);
   -webkit-transform: scale(1, -1);
   -o-transform: scale(1, -1);
   -ms-transform: scale(1, -1);
