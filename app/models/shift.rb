@@ -5,6 +5,8 @@ class Shift < ActiveRecord::Base
 
   geocoded_by :ip_address
 
+  belongs_to :location
+
   def nil_out_zero_lat_long
     if (latitude.blank? || longitude.blank?) || (latitude.zero? && longitude.zero?)
       self.latitude = nil
