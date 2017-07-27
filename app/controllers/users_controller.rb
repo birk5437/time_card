@@ -15,9 +15,11 @@ class UsersController < ApplicationController
 
   def clock_page
     @user = current_user
+    @shift = @user.shifts.new
   end
 
   def clock_in
+    # raise params.inspect
     if @user.clocked_out?
       @user.clock_in!(request.remote_ip)
       redirect_to "/", notice: 'User has been clocked in.'

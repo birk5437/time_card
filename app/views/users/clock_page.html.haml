@@ -5,13 +5,20 @@
   %h3= "Shift Duration: #{time_ago_in_words(@user.latest_shift.clock_in_time)}"
   = link_to "Clock Out", clock_out_user_path(@user), :class => 'btn btn-success'
 - else
+  - if @shift.errors.present?
+    = @shift.errors.full_messages.join("<br />").html_safe
+  = form_for @shift, :html => { :class => 'form-horizontal form-model' } do |f|
+    .form-group
+      = f.label :location, :class => 'control-label col-md-2'
+      .col-md-10
+        = select_tag 'location_id', options_for_select(Location.all.collect{ |l| [l.to_s, l.id] })#, class: "styled-select slate"
   = link_to "Clock In", clock_in_user_path(@user), :class => 'btn btn-success'
 
 :javascript
   setTimeout(function(){
     // window.location = "/logout";
-    $("#sign_out_link").click();
-  }, 10000);
+    //$("#sign_out_link").click();
+  }, 60000);
 
 -#.fieldset
 -#  %dl
