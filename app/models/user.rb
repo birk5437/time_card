@@ -18,6 +18,8 @@ class User < ActiveRecord::Base
 
   validates :email, presence: true, :if => proc{ |u| u.admin? }
 
+  before_validation :set_default_password
+
 
   def latest_shift
     shifts.order('clock_in_time desc').limit(1).first
@@ -67,6 +69,15 @@ class User < ActiveRecord::Base
 
   def role_symbols
     (roles || []).map {|r| r.title.to_sym}
+  end
+
+  private
+
+  def set_default_password
+    if password.blank?
+      password = DEFAULT_PASSWORD
+      password_confirmation = DEFAULT_PASSWORD
+    end
   end
 
 end
