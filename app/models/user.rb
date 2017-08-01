@@ -25,6 +25,10 @@ class User < ActiveRecord::Base
     shifts.order('clock_in_time desc').limit(1).first
   end
 
+  # def hours_worked_this_week
+  #   shifts.where(["clock_in_time >= ?", Date.today.beginning_of_week.beginning_of_day])
+  # end
+
   def admin?
     roles.all.map(&:title).include?("admin")
   end

@@ -1,13 +1,23 @@
 %table.table
   %thead
     %tr
-      %th ID
       %th User
-      %th Clock-In Time
-      %th Clock-Out Time
+      %th Status
+      %th
   %tbody
     - @users.each do |user|
       %tr
-        - if permitted_to?(:show, user)
-          %td= link_to user.name, user_path(user)
-        %td= user.email
+        %td
+          %h3= user.name
+        %td
+          - if user.clocked_in?
+            %h4{style: "color: #4CAF50; font-weight: bold;"}= "Clocked In"
+            %p= format_time(user.latest_shift.clock_in_time)
+          - elsif user.latest_shift.present?
+            %h4{style: "color: #aaaaaa;"}= "Clocked Out"
+            %p{style: "color: #aaaaaa;"}= format_time(user.latest_shift.clock_out_time)
+          - else
+            %h4{style: "color: #aaaaaa;"}= "No shifts yet"
+        %td
+          - if permitted_to?(:show, user)
+            = link_to "View Shifts", user_path(user), :class => 'btn btn-success'

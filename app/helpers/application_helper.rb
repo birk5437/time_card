@@ -4,7 +4,7 @@ module ApplicationHelper
   end
 
   #https://github.com/scottwater/detect_timezone_rails
-  def format_time(time, timezone="America/New_York", strftime_format="%A %B %e, %Y %R%P")
+  def format_time(time, timezone="America/New_York", strftime_format="%A %B %e, %Y %l:%M%P")
     return "" if time.blank?
     time.to_time.in_time_zone(timezone).strftime(strftime_format)
   end
