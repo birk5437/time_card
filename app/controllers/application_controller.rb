@@ -3,6 +3,8 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
+  before_filter :set_current_user
+
   private
   
   #-> Prelang (user_login:devise)
@@ -21,6 +23,11 @@ class ApplicationController < ActionController::Base
 
       redirect_to fallback_redirect, flash: {error: "You must be signed in to view this page."}
     end
+  end
+
+  protected
+  def set_current_user
+    Authorization.current_user = current_user
   end
 
 end

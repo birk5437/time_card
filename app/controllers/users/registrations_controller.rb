@@ -1,5 +1,6 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   include ApplicationHelper
+  filter_access_to :all
 
   def create
     @user = User.new(sign_up_params)

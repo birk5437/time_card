@@ -1,5 +1,4 @@
 class User < ActiveRecord::Base
-  has_and_belongs_to_many :roles
 
   DEFAULT_PASSWORD = "asdfg"
 
@@ -8,6 +7,9 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+
+  has_many :user_roles, dependent: :destroy, autosave: true
+  has_many :roles, through: :user_roles, autosave: true
 
   has_many :shifts, dependent: :destroy
 
@@ -73,6 +75,40 @@ class User < ActiveRecord::Base
 
   def role_symbols
     (roles || []).map {|r| r.title.to_sym}
+  end
+
+  def admin=(input)
+    if input
+      grant_role(:admin)
+    else
+      revoke_role(:admin)
+    end
+  end
+
+  def superuser=(input)
+    if input
+      grant_role(:superuser)
+    else
+      revoke_role(:superuser)
+    end
+  end
+
+  # TODO: Doesnt work
+  def revoke_role(role_symbol)
+    role_name = role_symbol.to_s.humanize.downcase
+    if role_symbols.include?(role_symbol)
+      role = Role.ci_find_by_name(role_name)
+      ur = user_roles.find_by(role: role)
+      ur.mark_for_destruction if ur.present?
+    end    
+  end
+
+  def grant_role(role_symbol)
+    role_name = role_symbol.to_s.humanize.downcase
+    unless role_symbols.include?(role_symbol)
+      role = Role.ci_find_by_name(role_name)
+      self.user_roles.build(role: role)
+    end
   end
 
   private

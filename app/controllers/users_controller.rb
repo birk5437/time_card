@@ -1,11 +1,13 @@
 class UsersController < ApplicationController
-  filter_access_to :all
-  before_action :set_user, only: [:show, :edit, :update, :destroy, :vote, :clock_in, :clock_out]
+  before_filter :set_user, only: [:show, :edit, :update, :destroy, :vote, :clock_in, :clock_out]
+  filter_access_to :all, attribute_check: true
+  filter_access_to :new
+  filter_access_to :clock_page
+  filter_access_to :index
 
   # GET /users
   # GET /users.json
   def index
-    # TODO: replace sort_order with acts_as_votable
     @users = User.all
     respond_to do |format|
       format.html
@@ -19,7 +21,6 @@ class UsersController < ApplicationController
   end
 
   def clock_in
-    # raise params.inspect
     if @user.clocked_out?
       @user.clock_in!(request.remote_ip)
       redirect_to "/", notice: 'User has been clocked in.'
@@ -108,6 +109,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:email, :password, :admin, :first_name, :last_name, :pin)
+      params.require(:user).permit(:email, :password, :admin, :superuser, :first_name, :last_name, :pin)
     end
 end

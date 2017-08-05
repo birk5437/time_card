@@ -1,7 +1,6 @@
 class ShiftsController < ApplicationController
-  filter_access_to :all
-  # before_filter :redirect_unless_admin, only: [:new, :create, :edit, :update, :destroy]
   before_action :set_shift, only: [:show, :edit, :update, :destroy, :vote]
+  filter_access_to :all, attribute_check: true
 
   # GET /shifts
   # GET /shifts.json

@@ -2,15 +2,19 @@ authorization do
   role :guest do
     # add permissions for guests here, e.g.
     # has_permission_on :conferences, :to => :read
+    has_permission_on :users_registrations, to: [:create]
+    # has_permission_on :users_registrations, to: :signup
+    # has_permission_on :users, to: :signup
   end
 
   role :barista do
     has_permission_on :shifts, to: :manage do
-      if_attribute :user => is { user }
+      if_attribute :user_id => is { user.id }
     end
-    has_permission_on :users, to: [:read_and_update_without_index, :clock_page, :clock_in, :clock_out] do
+    has_permission_on :users, to: [:account, :update, :show, :clock_in, :clock_out] do
       if_attribute :id => is { user.id }
     end
+    has_permission_on :users, to: [:clock_page]
   end
 
   role :manager do
@@ -45,9 +49,10 @@ privileges do
   privilege :manage, :includes => [:create, :read, :update, :delete]
   privilege :read_and_update, :includes => [:create, :read, :update]
   privilege :read_and_update_without_index, :includes => [:create, :update, :show]
+  privilege :update_and_show, :includes => [:create, :update, :show]
   privilege :read, :includes => [:index, :show]
-  privilege :create, :includes => :new
-  privilege :update, :includes => :edit
+  privilege :create, :includes => [:new, :create]
+  privilege :update, :includes => [:edit, :update]
   privilege :delete, :includes => :destroy
 
 end
