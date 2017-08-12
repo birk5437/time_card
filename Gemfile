@@ -81,5 +81,7 @@ gem 'ratyrate', :github => 'wazery/ratyrate', :branch => 'master'
 gem 'rails_12factor', group: :production
 gem 'geocoder'
 
+gem "recaptcha", require: "recaptcha/rails"
+
 # http://railscasts.com/episodes/258-token-fields?view=asciicast
 gem 'jquery-tokeninput-rails'

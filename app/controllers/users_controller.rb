@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   before_filter :set_user, only: [:show, :edit, :update, :destroy, :vote, :clock_in, :clock_out]
   filter_access_to :all, attribute_check: true
   filter_access_to :new
+  filter_access_to :create
   filter_access_to :clock_page
   filter_access_to :index
 
@@ -59,13 +60,14 @@ class UsersController < ApplicationController
     @user.created_by = current_user
     @user.password = User::DEFAULT_PASSWORD
     @user.password_confirmation = User::DEFAULT_PASSWORD
+    @user.grant_role(:barista)
 
-    @user.roles << Role.ci_find_by_name('barista')
+    # @user.roles << Role.ci_find_by_name('barista')
 
     respond_to do |format|
-      if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
-        format.json { render :show, status: :created, location: @user }
+      if verify_recaptcha(model: @user) && @user.save
+        format.html { redirect_to '/', notice: 'User was successfully created.' }
+        format.json { render status: :created }
       else
         format.html { render :new }
         format.json { render json: @user.errors, status: :unprocessable_entity }

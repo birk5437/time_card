@@ -3,6 +3,7 @@ authorization do
     # add permissions for guests here, e.g.
     # has_permission_on :conferences, :to => :read
     has_permission_on :users_registrations, to: [:create]
+    has_permission_on :users, to: [:create]
     # has_permission_on :users_registrations, to: :signup
     # has_permission_on :users, to: :signup
   end

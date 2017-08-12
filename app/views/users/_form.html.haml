@@ -29,6 +29,9 @@
         = f.check_box :superuser, :class => 'text-field form-control', autocomplete: "off", disabled: current_user == @user
   .form-group
     .col-md-offset-2.col-md-10
+      = recaptcha_tags
+  .form-group
+    .col-md-offset-2.col-md-10
       = f.submit nil, :class => 'btn btn-primary'
       = link_to t('.cancel', :default => t("helpers.links.cancel")), |
         users_path, :class => 'btn btn-default'                      |

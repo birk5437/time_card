@@ -97,8 +97,8 @@ Rails.application.routes.draw do
     delete "signout" => "users/sessions#destroy",     as: :destroy_user_session
     # root to: "devise/sessions#new"
     
-    get    "signup"  => "users/registrations#new",    as: :new_user_registration
-    post   "signup"  => "users/registrations#create", as: :user_registration
+    get    "signup"  => "users",  action: "new"
+    post   "signup"  => "users/create", action: "create"
     put    "signup"  => "users/registrations#update", as: :update_user_registration
     get    "account" => "users/registrations#edit",   as: :edit_user_registration
   end
