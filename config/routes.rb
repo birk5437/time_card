@@ -94,7 +94,7 @@ Rails.application.routes.draw do
   devise_scope :user do
     get    "login"   => "users/sessions#new",         as: :new_user_session
     post   "login"   => "users/sessions#create",      as: :user_session
-    delete "signout" => "users/sessions#destroy",     as: :destroy_user_session
+    delete "logout" => "users/sessions#destroy",     as: :destroy_user_session
     # root to: "devise/sessions#new"
     
     get    "signup"  => "users",  action: "new"

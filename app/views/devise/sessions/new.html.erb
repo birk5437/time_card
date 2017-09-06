@@ -41,10 +41,15 @@
     </div>
   </div>
 
+  <%= label_tag "blank_me", "Leave this blank", :id => 'blank_me_label' %>
+  <%= text_field_tag 'blank_me', '' %>
+
 <% end %>
 
 <script type="text/javascript">
   $(document).ready(function(){
+    $('#blank_me').hide();
+    $('#blank_me_label').hide();
     $(".nmpd-display").val('');
     // $.fn.numpad.defaults.gridTpl = '<table class="table"></table>';
     $.fn.numpad.defaults.displayTpl = '<input type="password" class="form-control pin-input"/>';
