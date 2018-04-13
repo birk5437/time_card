@@ -1,0 +1,12 @@
+- if @business.errors.present?
+  = @business.errors.full_messages.join("<br />").html_safe
+= form_for @business, :html => { :class => 'form-horizontal form-model' } do |f|
+  .form-group
+    = f.label :name, :class => 'control-label col-md-2'
+    .col-md-10
+      = f.text_field :name, :class => 'text-field form-control', autocomplete: "off"
+  .form-group
+    .col-md-offset-2.col-md-10
+      = f.submit nil, :class => 'btn btn-primary'
+      = link_to t('.cancel', :default => t("helpers.links.cancel")), |
+        lotions_path, :class => 'btn btn-default'

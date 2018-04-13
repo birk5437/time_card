@@ -27,6 +27,7 @@ Rails.application.routes.draw do
     end
   end
   resources :shifts
+  resources :businesses
 
   # resources :tags, only: [:index]
   # match '/tags/:dehumanized_name', :via => :get, :to => 'tags#show'

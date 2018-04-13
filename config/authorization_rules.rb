@@ -26,6 +26,7 @@ authorization do
     includes :manager
     has_permission_on :shifts, to: :manage
     has_permission_on :users, to: :manage
+    has_permission_on :businesses, to: :manage
   end
 
   role :superuser do
